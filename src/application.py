@@ -37,5 +37,10 @@ def about():
     return render_template("about.html", ruta="about")
 
 
+@app.route("/sub")
+def sub():
+    return render_template("subIndex.html", ruta="sub")
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)
