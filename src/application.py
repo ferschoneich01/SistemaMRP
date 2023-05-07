@@ -84,8 +84,12 @@ def signUp():
         if not request.form.get("name"):
             flash('Ingrese su nombre')
             return redirect("/signUp")
-            
-        if not request.form.get("username"):
+
+        if not request.form.get("lastname"):
+            flash('Ingrese su apellido')
+            return redirect("/signIn")
+
+        if not request.form.get(""):
             flash('Ingrese un nombre de usuario')
             return redirect("/signIn")
 
