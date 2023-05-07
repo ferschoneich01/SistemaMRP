@@ -53,6 +53,10 @@ def signIn():
         user = db.execute(
             "SELECT * FROM users WHERE username = '"+str(username)+"'").fetchall()
         print(generate_password_hash(user[0][2]))
+
+        db.execute(text("UPDATE users SET pass = (cedula,name,lastname,birthday,phone,country,city,sex) VALUES ('"+str(cedula)+"','"+str(name) +
+                       "','"+str(lastname)+"','"+str(birthday)+"','"+str(phone)+"','Nicaragua','"+str(city)+"','"+str(sex)+"')"))
+        db.commit()
         # Ensure username exists and password is correct
         if len(user) != 1 or not check_password_hash(user[0][2], password):
             flash('Contraseña Incorrecta')
