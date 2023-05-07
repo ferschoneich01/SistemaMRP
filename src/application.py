@@ -54,12 +54,12 @@ def signIn():
         # Ensure username exists and password is correct
         if len(user) != 1 or not check_password_hash(user[0][2], password):
             flash('Contraseña Incorrecta')
-            return redirect("/login")
+            return redirect("/signIn")
 
             # Remember which user has logged in
             session["id_user"] = user[0][0]
             session["username"] = username
-            session["role_user"] = user[0][5]
+            #session["role_user"] = user[0][5]
             return redirect('/')
         else:
             return render_template("login.html", ruta="Login")
