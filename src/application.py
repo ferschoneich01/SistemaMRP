@@ -31,10 +31,11 @@ def index():
 
 # ruta informacion
 
+#
+@app.route("/signIn")
+def signIn():
 
-@app.route("/login")
-def login():
-    return render_template("login.html", ruta="about")
+    return render_template("login.html", ruta="Login")
 
 
 @app.route("/sub")
