@@ -50,8 +50,7 @@ def signIn():
             flash('Ingrese una contraseña')
             return redirect("/signIn")
 
-        user = db.execute(
-            text("SELECT * FROM users WHERE username = '"+str(username)+"'")).fetchall()
+        user = db.execute("SELECT * FROM users WHERE username = '"+str(username)+"'").fetchall()
 
         # Ensure username exists and password is correct
         if len(user) != 1 or not check_password_hash(user[0][2], password):
