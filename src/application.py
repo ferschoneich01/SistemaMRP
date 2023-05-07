@@ -34,7 +34,8 @@ def index():
 #Iniciar sesion
 @app.route("/signIn", method=["POST"])
 def signIn():
-    
+    if request.method = 'post':
+        
     return render_template("login.html", ruta="Login")
 
 
