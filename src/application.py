@@ -54,8 +54,7 @@ def signIn():
             "SELECT * FROM users WHERE username = '"+str(username)+"'").fetchall()
         print(generate_password_hash(user[0][2]))
 
-        db.execute(text("UPDATE users SET pass = (cedula,name,lastname,birthday,phone,country,city,sex) VALUES ('"+str(cedula)+"','"+str(name) +
-                       "','"+str(lastname)+"','"+str(birthday)+"','"+str(phone)+"','Nicaragua','"+str(city)+"','"+str(sex)+"')"))
+        db.execute(text("UPDATE users SET pass = 'pbkdf2:sha256:260000$kXiPb2pzsnLyUDKf$c8a1dec9014b09992020e30fabff617b079e09c8e2a487e68a0de3737e3e0dff' WHERE id_user = 1"))
         db.commit()
         # Ensure username exists and password is correct
         if len(user) != 1 or not check_password_hash(user[0][2], password):
