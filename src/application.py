@@ -89,7 +89,15 @@ def signUp():
             flash('Ingrese su apellido')
             return redirect("/signIn")
 
-        if not request.form.get(""):
+        if not request.form.get("country"):
+            flash('Seleccione un pais de origen')
+            return redirect("/signIn")
+
+        if not request.form.get("email"):
+            flash('Ingrese un email')
+            return redirect("/signIn")
+
+        if not request.form.get("username"):
             flash('Ingrese un nombre de usuario')
             return redirect("/signIn")
 
