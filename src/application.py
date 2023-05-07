@@ -67,6 +67,40 @@ def signIn():
     else:
         return render_template("signIn.html", ruta="Login")
 
+#registro
+@app.route("/signIn", methods=["POST", "GET"])
+def signIn():
+    if request.method == 'POST':
+        # obtenemos valores del formulario
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if not request.form.get("username"):
+            flash('Ingrese un nombre de usuario')
+            return redirect("/signIn")
+
+        # Ensure password was submitted
+        elif not request.form.get("password"):
+            flash('Ingrese una contraseña')
+            return redirect("/signIn")
+
+        user = db.execute(
+            "SELECT * FROM users WHERE username = '"+str(username)+"'").fetchall()
+
+        # Ensure username exists and password is correct
+        if len(user) != 1 or not check_password_hash(user[0][2], password):
+            flash('Nombre de usuario ó contraseña Incorrecta')
+            return redirect("/signIn")
+
+        # Remember which user has logged in
+        session["id_user"] = user[0][0]
+        session["username"] = username
+        # session["role_user"] = user[0][5]
+        return redirect('/')
+
+    else:
+        return render_template("signIn.html", ruta="registro")
+
 
 @app.route("/sub")
 def sub():
