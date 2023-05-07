@@ -1,16 +1,6 @@
 {% extends 'layout.html' %}
 {% block body %}
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<ul class=flashes>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-{% endwith %}
-
 <form action="/signIn" method="POST">
     <div class="form-group">
         <label for="usuario">Nombre de usuario:</label>
@@ -22,6 +12,15 @@
         <input name="password" type="password" class="form-control" id="contraseña"
             placeholder="Introduce tu contraseña">
     </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
     <br>
     <button type="submit" class="btn btn-primary">Iniciar sesión</button>
 </form>
