@@ -34,7 +34,7 @@ def index():
 
 @app.route("/login")
 def login():
-    return render_template("about.html", ruta="about")
+    return render_template("login.html", ruta="about")
 
 
 @app.route("/sub")
