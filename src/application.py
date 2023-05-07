@@ -68,8 +68,8 @@ def signIn():
         return render_template("signIn.html", ruta="Login")
 
 #registro
-@app.route("/signIn", methods=["POST", "GET"])
-def signIn():
+@app.route("/signUp", methods=["POST", "GET"])
+def signUp():
     if request.method == 'POST':
         # obtenemos valores del formulario
         username = request.form.get("username")
