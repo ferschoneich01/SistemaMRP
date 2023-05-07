@@ -57,11 +57,11 @@ def signIn():
             flash('Contraseña Incorrecta')
             return redirect("/signIn")
 
-            # Remember which user has logged in
-            session["id_user"] = user[0][0]
-            session["username"] = username
-            # session["role_user"] = user[0][5]
-            return redirect('/')
+        # Remember which user has logged in
+        session["id_user"] = user[0][0]
+        session["username"] = username
+        # session["role_user"] = user[0][5]
+        return redirect('/')
         else:
             return render_template("signIn.html", ruta="Login")
     else:
