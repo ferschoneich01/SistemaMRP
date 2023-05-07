@@ -76,18 +76,23 @@ def signUp():
         lastname = request.form.get("lastname")
         country = request.form.get("country")
         city = request.form.get("city")
-        
+        age = request.form.get("age")
+        email = request.form.get("email")
         username = request.form.get("username")
         password = request.form.get("password")
 
+        if not request.form.get("name"):
+            flash('Ingrese su nombre')
+            return redirect("/signUp")
+
         if not request.form.get("username"):
             flash('Ingrese un nombre de usuario')
-            return redirect("/signIn")
+            return redirect("/signUn")
 
         # Ensure password was submitted
         elif not request.form.get("password"):
             flash('Ingrese una contraseña')
-            return redirect("/signIn")
+            return redirect("/signUn")
 
         user = db.execute(
             "SELECT * FROM users WHERE username = '"+str(username)+"'").fetchall()
