@@ -52,10 +52,10 @@ def signIn():
 
         user = db.execute(
             "SELECT * FROM users WHERE username = '"+str(username)+"'").fetchall()
-        
+
         # Ensure username exists and password is correct
         if len(user) != 1 or not check_password_hash(user[0][2], password):
-            flash('Contraseña Incorrecta')
+            flash('Nombre de usuario ó contraseña Incorrecta')
             return redirect("/signIn")
 
         # Remember which user has logged in
