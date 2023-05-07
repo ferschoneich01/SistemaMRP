@@ -72,6 +72,8 @@ def signIn():
 def signUp():
     if request.method == 'POST':
         # obtenemos valores del formulario
+        name = request.form.get("name")
+        lastname = request.form.get("lastname")
         username = request.form.get("username")
         password = request.form.get("password")
 
