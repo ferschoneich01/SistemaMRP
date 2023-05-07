@@ -74,6 +74,9 @@ def signUp():
         # obtenemos valores del formulario
         name = request.form.get("name")
         lastname = request.form.get("lastname")
+        country = request.form.get("country")
+        city = request.form.get("city")
+        
         username = request.form.get("username")
         password = request.form.get("password")
 
