@@ -32,10 +32,14 @@ def index():
 # ruta informacion
 
 #Iniciar sesion
-@app.route("/signIn", method=["POST"])
+@app.route("/signIn", methods=["POST"])
 def signIn():
-    if request.method = 'post':
-        
+    if request.method == 'POST':
+        #obtenemos 
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+
     return render_template("login.html", ruta="Login")
 
 
