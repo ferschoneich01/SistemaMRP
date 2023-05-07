@@ -32,9 +32,9 @@ def index():
 # ruta informacion
 
 #Iniciar sesion
-@app.route("/signIn", method)
+@app.route("/signIn", method=["POST"])
 def signIn():
-
+    
     return render_template("login.html", ruta="Login")
 
 
