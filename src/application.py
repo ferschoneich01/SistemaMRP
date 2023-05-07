@@ -34,7 +34,7 @@ def index():
 # Iniciar sesion
 
 
-@app.route("/signIn", methods=["POST"])
+@app.route("/signIn", methods=["POST", "GET"])
 def signIn():
     if request.method == 'POST':
         # obtenemos valores del formulario
@@ -65,6 +65,8 @@ def signIn():
             return redirect('/')
         else:
             return render_template("signIn.html", ruta="Login")
+    else:
+        return render_template("signIn.html", ruta="Login")
 
 
 @app.route("/sub")
