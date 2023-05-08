@@ -138,9 +138,7 @@ def signUp():
 
             flash('¡Cuenta creada exitosamente!')
             # Redirect user to login page
-            return redirect("/singIn")
-
-        return redirect('/')
+            return redirect("/signIn")
 
     else:
         return render_template("signIn.html", ruta="registro")
