@@ -116,23 +116,15 @@ def signUp():
         eml = db.execute(
             "SELECT * FROM users WHERE email = '"+str(email)+"'").fetchall()
 
-        if len(user) != 1:
+        if len(user) > 0:
             flash('El nombre de usuario ingresado ya existe')
             return redirect("/signUp")
 
-        if len(user) != 1:
+        elif len(user) > 0:
             flash('la dirección de correo electronico ingresada ya esta en uso')
             return redirect("/signUp")
 
-        # Ensure username exists and password is correct
-        if len(user) != 1 or not check_password_hash(user[0][2], password):
-            flash('Nombre de usuario ó contraseña Incorrecta')
-            return redirect("/signIn")
 
-        # Remember which user has logged in
-        session["id_user"] = user[0][0]
-        session["username"] = username
-        # session["role_user"] = user[0][5]
         return redirect('/')
 
     else:
