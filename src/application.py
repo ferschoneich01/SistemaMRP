@@ -123,7 +123,22 @@ def signUp():
         elif len(user) > 0:
             flash('la dirección de correo electronico ingresada ya esta en uso')
             return redirect("/signUp")
+        else:
+            # Query database for person
+            db.execute(text("INSERT INTO person (cedula,name,lastname,birthday,phone,country,city,sex) VALUES ('"+str(cedula)+"','"+str(name) +
+                       "','"+str(lastname)+"','"+str(birthday)+"','"+str(phone)+"','Nicaragua','"+str(city)+"','"+str(sex)+"')"))
+            db.commit()
+            # Query selection id person
+            user = db.execute(text(
+                "SELECT * FROM person WHERE cedula = '"+cedula+"'")).fetchall()
+            # Query database for users
+            db.execute(text("INSERT INTO users (username,password,email,person,role) VALUES ('" +
+                       str(username)+"','"+str(password)+"','"+str(email)+"',"+str(user[0][6])+",2)"))
+            db.commit()
 
+            flash('¡Cuenta creada exitosamente!')
+            # Redirect user to login page
+            return redirect("/singIn")
 
         return redirect('/')
 
