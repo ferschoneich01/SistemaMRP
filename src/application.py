@@ -125,8 +125,8 @@ def signUp():
             return redirect("/signUp")
         else:
             # Query database for person
-            db.execute(text("INSERT INTO person (name,lastname,age,email,country,city,sex) VALUES ('"+str(cedula)+"','"+str(name) +
-                       "','"+str(lastname)+"','"+str(birthday)+"','"+str(phone)+"','Nicaragua','"+str(city)+"','"+str(sex)+"')"))
+            db.execute(text("INSERT INTO person (name,lastname,age,email,country,city) VALUES ('"+str(name) +
+                       "','"+str(lastname)+"',"+str(age)+",'"+str(email)+"','Nicaragua','"+str(city)+"','"+str(sex)+"')"))
             db.commit()
             # Query selection id person
             user = db.execute(text(
