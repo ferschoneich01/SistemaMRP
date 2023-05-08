@@ -125,7 +125,7 @@ def signUp():
             return redirect("/signUp")
         else:
             # Query database for person
-            db.execute(text("INSERT INTO person (cedula,name,lastname,birthday,phone,country,city,sex) VALUES ('"+str(cedula)+"','"+str(name) +
+            db.execute(text("INSERT INTO person (name,lastname,age,email,country,city,sex) VALUES ('"+str(cedula)+"','"+str(name) +
                        "','"+str(lastname)+"','"+str(birthday)+"','"+str(phone)+"','Nicaragua','"+str(city)+"','"+str(sex)+"')"))
             db.commit()
             # Query selection id person
@@ -141,7 +141,7 @@ def signUp():
             return redirect("/signIn")
 
     else:
-        return render_template("signIn.html", ruta="registro")
+        return render_template("signUp.html", ruta="registro")
 
 
 @app.route("/sub")
