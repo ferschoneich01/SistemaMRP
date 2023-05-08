@@ -134,7 +134,7 @@ def signUp():
 
             # Query database for users
             db.execute(text("INSERT INTO users (username,password,id_person,id_role) VALUES ('" +
-                       str(username)+"','"+str(password)+"',"+str(user[0])+","+str(user[0][6])+",2)"))
+                       str(username)+"','"+str(password)+"',"+str(user[0][])+","+str(user[0][6])+",2)"))
             db.commit()
 
             flash('¡Cuenta creada exitosamente!')
