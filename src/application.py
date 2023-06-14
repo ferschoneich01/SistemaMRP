@@ -1,4 +1,4 @@
-from flask import Flask,request, redirect, sessions, jsonify
+from flask import Flask,request, redirect, jsonify
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import create_engine
