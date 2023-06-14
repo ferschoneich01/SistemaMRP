@@ -8,7 +8,7 @@ import json
 
 app = Flask(__name__)
 
-books = [
+items = [
     {
         'id': 1,
         'title': 'El gran Gatsby',
@@ -39,8 +39,8 @@ db = scoped_session(sessionmaker(bind=engine))
 
 # Obtener todos los items
 @app.route('/inventory', methods=['GET'])
-def get_books():
-    return jsonify(books)
+def get_items():
+    return jsonify(items)
 
 # Obtener un item por su ID
 @app.route('/inventory/<int:id_item>', methods=['GET'])
@@ -63,8 +63,8 @@ def add_item():
         'id_category': request.json['id_category'],
         'id_product_detail': request.json['id_product_detail']
     }
-    books.append(new_book)
-    return jsonify({'message': 'Libro agregado', 'book': new_book}), 201
+    items.append(new_item)
+    return jsonify({'message': 'Libro agregado', 'item': new_item}), 201
 
 # Actualizar un libro existente
 @app.route('/inventory/<int:id_item', methods=['PUT'])
@@ -72,16 +72,16 @@ def update_item(id_item):
     item = next((item for item in items if item['id_item'] == id_item), None)
     if item:
         item['title'] = request.json['title']
-        book['author'] = request.json['author']
-        return jsonify({'message': 'Libro actualizado', 'book': book})
+        item['author'] = request.json['author']
+        return jsonify({'message': 'Libro actualizado', 'item': item})
     return jsonify({'message': 'Libro no encontrado'}), 404
 
 # Eliminar un libro
-@app.route('/books/<int:book_id>', methods=['DELETE'])
-def delete_book(book_id):
-    book = next((book for book in books if book['id'] == book_id), None)
-    if book:
-        books.remove(book)
+@app.route('/items/<int:item_id>', methods=['DELETE'])
+def delete_item(item_id):
+    item = next((item for item in items if item['id'] == item_id), None)
+    if item:
+        items.remove(item)
         return jsonify({'message': 'Libro eliminado'})
     return jsonify({'message': 'Libro no encontrado'}), 404
 
