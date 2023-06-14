@@ -64,7 +64,7 @@ def get_item(id_item):
 # Agregar un nuevo item
 
 
-@app.route('/addItem', methods=['POST'])
+@app.route('/inventory/addItem', methods=['POST'])
 def add_item():
     new_item = {
         'id_item': len(items) + 1,
