@@ -111,6 +111,11 @@ def delete_item(id_item):
 # Obtener todos los usuarios
 @app.route('/users', methods=['GET'])
 def get_items():
+    """user = db.execute(
+            "SELECT * FROM users WHERE username = '"+str(username)+"'").fetchall()"""
+    user = db.execute(
+            "SELECT * FROM users").fetchall()
+        
     return jsonify(users)
 
 # Obtener un item por su ID
