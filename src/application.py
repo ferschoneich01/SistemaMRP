@@ -87,13 +87,13 @@ def add_item():
 def update_item(id_item):
     item = next((item for item in items if item['id_item'] == id_item), None)
     if item:
-        'sku': request.json['sku'],
-        'description': request.json['description'],
-        'price': request.json['price'],
-        'stock': request.json['stock'],
-        'maintenance_fee': request.json['maintenance_fee'],
-        'id_category': request.json['id_category'],
-        'id_product_detail': request.json['id_product_detail']
+        item['sku']= request.json['sku']
+        item['description']= request.json['description']
+        item['price']= request.json['price']
+        item['stock']= request.json['stock']
+        item['maintenance_fee']= request.json['maintenance_fee']
+        item['id_category']= request.json['id_category']
+        item['id_product_detail']= request.json['id_product_detail']
         return jsonify({'message': 'item actualizado', 'item': item})
     return jsonify({'message': 'item no encontrado'}), 404
 
