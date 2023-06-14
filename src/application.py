@@ -1,10 +1,11 @@
-from flask import Flask, render_template, url_for, request, flash, redirect, sessions, jsonify
+from flask import Flask,request, redirect, sessions, jsonify
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from funciones import *
 import json
+import uuid
 
 app = Flask(__name__)
 
