@@ -15,17 +15,17 @@ items = [
         'description': 'Laptop Hp Pavilion',
         'price': 500,
         'stock': 10,
-        'maintenance_fee': '5',
+        'maintenance_fee': 7,
         'id_category': 1,
         'id_product_detail': 1
     },
     {
         'id_item': 1,
-        'sku': '0001',
-        'description': 'Laptop Dell Pavilion',
-        'price': 500,
-        'stock': 10,
-        'maintenance_fee': '5',
+        'sku': '0002',
+        'description': 'Laptop Dell inspiron',
+        'price': 680,
+        'stock': 9,
+        'maintenance_fee': 7,
         'id_category': 1,
         'id_product_detail': 1
     },
