@@ -69,9 +69,9 @@ def add_item():
 # Actualizar un libro existente
 @app.route('/inventory/<int:id_item', methods=['PUT'])
 def update_item(id_item):
-    book = next((book for book in books if book['id'] == book_id), None)
-    if book:
-        book['title'] = request.json['title']
+    item = next((item for item in items if item['id_item'] == id_item), None)
+    if item:
+        item['title'] = request.json['title']
         book['author'] = request.json['author']
         return jsonify({'message': 'Libro actualizado', 'book': book})
     return jsonify({'message': 'Libro no encontrado'}), 404
