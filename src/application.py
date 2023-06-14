@@ -46,9 +46,9 @@ items = [
     },
 ]
 
-
+""" ENDPOINTS INVENTARIO ADD,UPDATE,DELETE,VIEW """
 # Obtener todos los items
-@app.route('/', methods=['GET'])
+@app.route('/inventory', methods=['GET'])
 def get_items():
     return jsonify(items)
 
@@ -97,9 +97,7 @@ def update_item(id_item):
         return jsonify({'message': 'item actualizado', 'item': item})
     return jsonify({'message': 'item no encontrado'}), 404
 
-# Eliminar un libro
-
-
+# Eliminar ITEM
 @app.route('/delete_item/<int:id_item>', methods=['DELETE'])
 def delete_item(id_item):
     item = next((item for item in items if item['id_item'] == id_item), None)
@@ -107,6 +105,9 @@ def delete_item(id_item):
         items.remove(item)
         return jsonify({'message': 'item eliminado'})
     return jsonify({'message': 'item no encontrado'}), 404
+
+
+""" ENDPOINTS USUARIO ADD,UPDATE,DELETE,VIEW """
 
 
 # Iniciar sesion
