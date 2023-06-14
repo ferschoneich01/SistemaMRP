@@ -9,7 +9,7 @@ import uuid
 
 app = Flask(__name__)
 
-# Check for environment variable
+"""# Check for environment variable
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
@@ -20,7 +20,7 @@ Session(app)
 
 # Set up database
 engine = create_engine(os.getenv("DATABASE_URL"))
-db = scoped_session(sessionmaker(bind=engine))
+db = scoped_session(sessionmaker(bind=engine))"""
 
 
 items = [
