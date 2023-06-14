@@ -116,6 +116,7 @@ def get_items():
     #obtenemos usuarios
     user = db.execute("SELECT * FROM users").fetchall()
 
+    #convertimos en json
     
 
     return jsonify(users)
