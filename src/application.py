@@ -104,7 +104,7 @@ def delete_item(id_item):
 
 
 # Iniciar sesion
-@app.route("/signIn", methods=["POST", "GET"])
+"""@app.route("/signIn", methods=["POST", "GET"])
 def signIn():
     if request.method == 'POST':
         # obtenemos valores del formulario
@@ -214,7 +214,7 @@ def signUp():
             return redirect("/signIn")
 
     else:
-        return render_template("signUp.html", ruta="registro")
+        return render_template("signUp.html", ruta="registro")"""
 
 
 if __name__ == "__main__":
