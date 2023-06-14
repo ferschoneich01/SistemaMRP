@@ -12,12 +12,12 @@ items = [
     {
         'id_item': 1,
         'sku': '0001',
-        'description': request.json['description'],
-        'price': request.json['price'],
-        'stock': request.json['stock'],
-        'maintenance_fee': request.json['maintenance_fee'],
-        'id_category': request.json['id_category'],
-        'id_product_detail': request.json['id_product_detail']
+        'description': 'Laptop Hp Pavilion',
+        'price': 500,
+        'stock': 10,
+        'maintenance_fee': '5',
+        'id_category': 1,
+        'id_product_detail': ,
         'id': 1,
         'title': 'El gran Gatsby',
         'author': 'F. Scott Fitzgerald'
