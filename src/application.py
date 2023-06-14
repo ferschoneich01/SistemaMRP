@@ -10,6 +10,14 @@ app = Flask(__name__)
 
 items = [
     {
+        'id_item': 1,
+        'sku': '0001',
+        'description': request.json['description'],
+        'price': request.json['price'],
+        'stock': request.json['stock'],
+        'maintenance_fee': request.json['maintenance_fee'],
+        'id_category': request.json['id_category'],
+        'id_product_detail': request.json['id_product_detail']
         'id': 1,
         'title': 'El gran Gatsby',
         'author': 'F. Scott Fitzgerald'
@@ -35,14 +43,14 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
 
-
-
 # Obtener todos los items
 @app.route('/inventory', methods=['GET'])
 def get_items():
     return jsonify(items)
 
 # Obtener un item por su ID
+
+
 @app.route('/inventory/<int:id_item>', methods=['GET'])
 def get_item(id_item):
     item = next((item for item in items if item['id_item'] == id_item), None)
@@ -51,6 +59,8 @@ def get_item(id_item):
     return jsonify({'message': 'item no encontrado'}), 404
 
 # Agregar un nuevo item
+
+
 @app.route('/addItem', methods=['POST'])
 def add_item():
     new_item = {
@@ -67,6 +77,8 @@ def add_item():
     return jsonify({'message': 'item agregado', 'item': new_item}), 201
 
 # Actualizar un libro existente
+
+
 @app.route('/inventory/<int:id_item', methods=['PUT'])
 def update_item(id_item):
     item = next((item for item in items if item['id_item'] == id_item), None)
@@ -77,26 +89,21 @@ def update_item(id_item):
     return jsonify({'message': 'Libro no encontrado'}), 404
 
 # Eliminar un libro
-@app.route('/items/<int:item_id>', methods=['DELETE'])
-def delete_item(item_id):
-    item = next((item for item in items if item['id'] == item_id), None)
+
+
+@app.route('/inventory/<int:id_item>', methods=['DELETE'])
+def delete_item(id_item):
+    item = next((item for item in items if item['id_item'] == id_item), None)
     if item:
         items.remove(item)
-        return jsonify({'message': 'Libro eliminado'})
-    return jsonify({'message': 'Libro no encontrado'}), 404
-
-if __name__ == '__main__':
-    app.run(debug=True)
+        return jsonify({'message': 'item eliminado'})
+    return jsonify({'message': 'item no encontrado'}), 404
 
 
 # ruta principal
-
-
 @app.route("/")
 def index():
     return render_template("index.html", ruta="inicio")
-
-# ruta informacion
 
 # Iniciar sesion
 
