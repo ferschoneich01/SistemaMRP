@@ -65,7 +65,7 @@ def get_item(id_item):
 # Agregar un nuevo item
 
 
-@app.route('/add_item/addItem', methods=['POST'])
+@app.route('/add-item/addItem', methods=['POST'])
 def add_item():
     new_item = {
         'id_item': len(items) + 1,
@@ -83,11 +83,10 @@ def add_item():
 # Actualizar un libro existente
 
 
-@app.route('/update_item/<int:id_item>', methods=['PUT'])
+@app.route('/update-item/<int:id_item>', methods=['PUT'])
 def update_item(id_item):
     item = next((item for item in items if item['id_item'] == id_item), None)
     if item:
-        'id_item': len(items) + 1,
         'sku': request.json['sku'],
         'description': request.json['description'],
         'price': request.json['price'],
