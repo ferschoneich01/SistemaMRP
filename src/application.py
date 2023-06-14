@@ -108,7 +108,64 @@ def delete_item(id_item):
 
 
 """ ENDPOINTS USUARIO ADD,UPDATE,DELETE,VIEW """
+# Obtener todos los usuarios
+@app.route('/users', methods=['GET'])
+def get_items():
+    return jsonify(users)
 
+# Obtener un item por su ID
+
+
+@app.route('/inventory/<int:id_item>', methods=['GET'])
+def get_item(id_item):
+    item = next((item for item in items if item['id_item'] == id_item), None)
+    if item:
+        return jsonify(item)
+    return jsonify({'message': 'item no encontrado'}), 404
+
+# Agregar un nuevo item
+
+
+@app.route('/add-item/addItem', methods=['POST'])
+def add_item():
+    new_item = {
+        'id_item': len(items) + 1,
+        'sku': request.json['sku'],
+        'description': request.json['description'],
+        'price': request.json['price'],
+        'stock': request.json['stock'],
+        'maintenance_fee': request.json['maintenance_fee'],
+        'id_category': request.json['id_category'],
+        'id_product_detail': request.json['id_product_detail']
+    }
+    items.append(new_item)
+    return jsonify({'message': 'item agregado', 'item': new_item}), 201
+
+# Actualizar un libro existente
+
+
+@app.route('/update-item/<int:id_item>', methods=['PUT'])
+def update_item(id_item):
+    item = next((item for item in items if item['id_item'] == id_item), None)
+    if item:
+        item['sku'] = request.json['sku']
+        item['description'] = request.json['description']
+        item['price'] = request.json['price']
+        item['stock'] = request.json['stock']
+        item['maintenance_fee'] = request.json['maintenance_fee']
+        item['id_category'] = request.json['id_category']
+        item['id_product_detail'] = request.json['id_product_detail']
+        return jsonify({'message': 'item actualizado', 'item': item})
+    return jsonify({'message': 'item no encontrado'}), 404
+
+# Eliminar ITEM
+@app.route('/delete_item/<int:id_item>', methods=['DELETE'])
+def delete_item(id_item):
+    item = next((item for item in items if item['id_item'] == id_item), None)
+    if item:
+        items.remove(item)
+        return jsonify({'message': 'item eliminado'})
+    return jsonify({'message': 'item no encontrado'}), 404
 
 # Iniciar sesion
 """@app.route("/signIn", methods=["POST", "GET"])
