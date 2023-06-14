@@ -47,7 +47,7 @@ items = [
 
 
 # Obtener todos los items
-@app.route('/inventory', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_items():
     return jsonify(items)
 
@@ -103,14 +103,7 @@ def delete_item(id_item):
     return jsonify({'message': 'item no encontrado'}), 404
 
 
-# ruta principal
-@app.route("/")
-def index():
-    return render_template("index.html", ruta="inicio")
-
 # Iniciar sesion
-
-
 @app.route("/signIn", methods=["POST", "GET"])
 def signIn():
     if request.method == 'POST':
