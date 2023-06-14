@@ -8,6 +8,20 @@ import json
 
 app = Flask(__name__)
 
+# Check for environment variable
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
+
+# Configure session to use filesystem
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+
+# Set up database
+engine = create_engine(os.getenv("DATABASE_URL"))
+db = scoped_session(sessionmaker(bind=engine))
+
+
 items = [
     {
         'id_item': 1,
@@ -30,19 +44,6 @@ items = [
         'id_product_detail': 1
     },
 ]
-
-# Check for environment variable
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
-
-# Configure session to use filesystem
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
-
-# Set up database
-engine = create_engine(os.getenv("DATABASE_URL"))
-db = scoped_session(sessionmaker(bind=engine))
 
 
 # Obtener todos los items
@@ -81,7 +82,7 @@ def add_item():
 # Actualizar un libro existente
 
 
-@app.route('/inventory/<int:id_item', methods=['PUT'])
+@app.route('/inventory/<int:id_item>', methods=['PUT'])
 def update_item(id_item):
     item = next((item for item in items if item['id_item'] == id_item), None)
     if item:
