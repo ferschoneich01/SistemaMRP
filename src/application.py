@@ -1,4 +1,4 @@
-from flask import Flask,request, redirect, jsonify
+from flask import Flask, request, redirect, jsonify
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import create_engine
@@ -65,7 +65,7 @@ def get_item(id_item):
 # Agregar un nuevo item
 
 
-@app.route('/inventory/addItem', methods=['POST'])
+@app.route('/add_item/addItem', methods=['POST'])
 def add_item():
     new_item = {
         'id_item': len(items) + 1,
@@ -83,19 +83,25 @@ def add_item():
 # Actualizar un libro existente
 
 
-@app.route('/inventory/<int:id_item>', methods=['PUT'])
+@app.route('/update_item/<int:id_item>', methods=['PUT'])
 def update_item(id_item):
     item = next((item for item in items if item['id_item'] == id_item), None)
     if item:
-        item['title'] = request.json['title']
-        item['author'] = request.json['author']
-        return jsonify({'message': 'Libro actualizado', 'item': item})
-    return jsonify({'message': 'Libro no encontrado'}), 404
+        'id_item': len(items) + 1,
+        'sku': request.json['sku'],
+        'description': request.json['description'],
+        'price': request.json['price'],
+        'stock': request.json['stock'],
+        'maintenance_fee': request.json['maintenance_fee'],
+        'id_category': request.json['id_category'],
+        'id_product_detail': request.json['id_product_detail']
+        return jsonify({'message': 'item actualizado', 'item': item})
+    return jsonify({'message': 'item no encontrado'}), 404
 
 # Eliminar un libro
 
 
-@app.route('/inventory/<int:id_item>', methods=['DELETE'])
+@app.route('/delete_item/<int:id_item>', methods=['DELETE'])
 def delete_item(id_item):
     item = next((item for item in items if item['id_item'] == id_item), None)
     if item:
