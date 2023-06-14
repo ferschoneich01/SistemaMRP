@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, flash, redirect, sessions
+from flask import Flask, render_template, url_for, request, flash, redirect, sessions, jsonify
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import create_engine
@@ -7,6 +7,19 @@ from funciones import *
 import json
 
 app = Flask(__name__)
+
+books = [
+    {
+        'id': 1,
+        'title': 'El gran Gatsby',
+        'author': 'F. Scott Fitzgerald'
+    },
+    {
+        'id': 2,
+        'title': '1984',
+        'author': 'George Orwell'
+    }
+]
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -20,6 +33,60 @@ Session(app)
 # Set up database
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
+
+
+
+
+# Obtener todos los items
+@app.route('/inventory', methods=['GET'])
+def get_books():
+    return jsonify(books)
+
+# Obtener un item por su ID
+@app.route('/inventory/<int:id_item>', methods=['GET'])
+def get_item(id_item):
+    item = next((item for item in items if item['id_item'] == id_item), None)
+    if item:
+        return jsonify(items)
+    return jsonify({'message': 'item no encontrado'}), 404
+
+# Agregar un nuevo item
+@app.route('/addItem', methods=['POST'])
+def add_item():
+    new_item = {
+        'id_item': len(items) + 1,
+        'sku': request.json['sku'],
+        'description': request.json['description'],
+        'price': request.json['price'],
+        'stock': request.json['stock'],
+        '': request.json['id_category'],
+        'id_category': request.json['id_category'],
+        'id_product_detail': request.json['id_product_detail']
+    }
+    books.append(new_book)
+    return jsonify({'message': 'Libro agregado', 'book': new_book}), 201
+
+# Actualizar un libro existente
+@app.route('/inventory/<int:id_item', methods=['PUT'])
+def update_item(id_item):
+    book = next((book for book in books if book['id'] == book_id), None)
+    if book:
+        book['title'] = request.json['title']
+        book['author'] = request.json['author']
+        return jsonify({'message': 'Libro actualizado', 'book': book})
+    return jsonify({'message': 'Libro no encontrado'}), 404
+
+# Eliminar un libro
+@app.route('/books/<int:book_id>', methods=['DELETE'])
+def delete_book(book_id):
+    book = next((book for book in books if book['id'] == book_id), None)
+    if book:
+        books.remove(book)
+        return jsonify({'message': 'Libro eliminado'})
+    return jsonify({'message': 'Libro no encontrado'}), 404
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
 # ruta principal
@@ -67,7 +134,9 @@ def signIn():
     else:
         return render_template("signIn.html", ruta="Login")
 
-#registro
+# registro de nuevo usuario
+
+
 @app.route("/signUp", methods=["POST", "GET"])
 def signUp():
     if request.method == 'POST':
@@ -134,7 +203,7 @@ def signUp():
 
             # Query database for users
             db.execute(text("INSERT INTO users (username,password,id_person,id_role) VALUES ('" +
-                       str(username)+"','"+str(password)+"',"+str(user[0][0])+","+str(user[0][6])+",2)"))
+                       str(username)+"','"+str(password)+"',"+str(user[0][0])+",2)"))
             db.commit()
 
             flash('¡Cuenta creada exitosamente!')
@@ -143,11 +212,6 @@ def signUp():
 
     else:
         return render_template("signUp.html", ruta="registro")
-
-
-@app.route("/sub")
-def sub():
-    return render_template("subIndex.html", ruta="sub")
 
 
 if __name__ == "__main__":
