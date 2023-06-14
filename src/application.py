@@ -34,7 +34,7 @@ items = [
         'id_product_detail': 1
     },
     {
-        'id_item': 1,
+        'id_item': 2,
         'sku': '0002',
         'description': 'Laptop Dell inspiron',
         'price': 680,
