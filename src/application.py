@@ -83,11 +83,10 @@ def add_item():
 # Actualizar un libro existente
 
 
-@app.route('/update-item/<int:id_item>', methods=['PUT'])
-def update_item(id_item):
-    item = next((item for item in items if item['id_item'] == id_item), None)
+@app.route('/update-item/<string:sku>', methods=['PUT'])
+def update_item(sku):
+    item = next((item for item in items if item['sku'] == id_item), None)
     if item:
-        item['sku'] = request.json['sku']
         item['description'] = request.json['description']
         item['price'] = request.json['price']
         item['stock'] = request.json['stock']
@@ -100,9 +99,9 @@ def update_item(id_item):
 # Eliminar un libro
 
 
-@app.route('/delete_item/<int:id_item>', methods=['DELETE'])
-def delete_item(id_item):
-    item = next((item for item in items if item['id_item'] == id_item), None)
+@app.route('/delete_item/<string:sku>', methods=['DELETE'])
+def delete_item(sku):
+    item = next((item for item in items if item['sku'] == id_item), None)
     if item:
         items.remove(item)
         return jsonify({'message': 'item eliminado'})
