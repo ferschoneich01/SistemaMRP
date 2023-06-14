@@ -17,16 +17,18 @@ items = [
         'stock': 10,
         'maintenance_fee': '5',
         'id_category': 1,
-        'id_product_detail': ,
-        'id': 1,
-        'title': 'El gran Gatsby',
-        'author': 'F. Scott Fitzgerald'
+        'id_product_detail': 1
     },
     {
-        'id': 2,
-        'title': '1984',
-        'author': 'George Orwell'
-    }
+        'id_item': 1,
+        'sku': '0001',
+        'description': 'Laptop Dell Pavilion',
+        'price': 500,
+        'stock': 10,
+        'maintenance_fee': '5',
+        'id_category': 1,
+        'id_product_detail': 1
+    },
 ]
 
 # Check for environment variable
