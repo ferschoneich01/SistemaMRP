@@ -59,12 +59,12 @@ def add_item():
         'description': request.json['description'],
         'price': request.json['price'],
         'stock': request.json['stock'],
-        '': request.json['id_category'],
+        'maintenance_fee': request.json['maintenance_fee'],
         'id_category': request.json['id_category'],
         'id_product_detail': request.json['id_product_detail']
     }
     items.append(new_item)
-    return jsonify({'message': 'Libro agregado', 'item': new_item}), 201
+    return jsonify({'message': 'item agregado', 'item': new_item}), 201
 
 # Actualizar un libro existente
 @app.route('/inventory/<int:id_item', methods=['PUT'])
