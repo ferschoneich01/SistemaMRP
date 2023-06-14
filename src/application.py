@@ -22,7 +22,6 @@ Session(app)
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))"""
 
-
 items = [
     {
         'id_item': 1,
@@ -117,7 +116,9 @@ def get_items():
     user = db.execute("SELECT * FROM users").fetchall()
 
     #convertimos en json
-    
+    userList = []
+
+    userList.add({})
 
     return jsonify(users)
 
